@@ -1,0 +1,14 @@
+{
+  "name": "youtube-ai-bot",
+  "version": "1.0.0",
+  "description": "Auto YouTube video creator with AI and n8n",
+  "scripts": {
+    "start": "node keep-alive.js & n8n start"
+  },
+  "dependencies": {
+    "n8n": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
