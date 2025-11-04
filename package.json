@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Auto YouTube video creator with AI and n8n",
   "scripts": {
-    "start": "node keep-alive.js & n8n start"
+    "start": "node keep-alive.js & n8n start",
+    "keep-alive": "node keep-alive.js"
   },
   "dependencies": {
-    "n8n": "^1.0.0"
+    "n8n": "^1.0.0",
+    "node-fetch": "^2.6.7"
   },
   "engines": {
     "node": ">=18.0.0"
