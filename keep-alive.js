@@ -1,5 +1,4 @@
 const http = require('http');
-const fetch = require('node-fetch');
 
 console.log('🚀 Starting Enhanced Keep-Alive System...');
 
@@ -16,7 +15,7 @@ keepAliveServer.listen(3001, '0.0.0.0', () => {
     console.log('🔧 Keep-alive server listening on port 3001');
 });
 
-// 2. دالة Ping محسنة
+// 2. دالة Ping محسنة باستخدام fetch المدمج (Node.js 18+)
 const pingServices = async () => {
     const timestamp = new Date().toLocaleString('ar-EG');
     console.log(`\n🔄 [${timestamp}] Starting ping cycle...`);
@@ -31,10 +30,7 @@ const pingServices = async () => {
     for (const service of services) {
         try {
             const startTime = Date.now();
-            const response = await fetch(service.url, {
-                method: 'GET',
-                timeout: 10000
-            });
+            const response = await fetch(service.url);
             const responseTime = Date.now() - startTime;
             
             console.log(`✅ ${service.name}: ${response.status} (${responseTime}ms)`);
@@ -51,22 +47,7 @@ const pingServices = async () => {
 
 // 3. نظام Ping مكثف كل 4 دقائق
 console.log('⏰ Starting 4-minute ping intervals...');
-
-// البدء فوري + كل 4 دقائق
-setTimeout(() => {
-    pingServices();
-}, 5000);
-
-setInterval(() => {
-    pingServices();
-}, 4 * 60 * 1000); // كل 4 دقائق بالضبط
-
-// 4. نظام مراقبة الذاكرة
-setInterval(() => {
-    const memoryUsage = process.memoryUsage();
-    const usedMB = Math.round(memoryUsage.heapUsed / 1024 / 1024);
-    
-    console.log(`🧠 Memory: ${usedMB}MB - ${new Date().toLocaleTimeString()}`);
-}, 60 * 1000);
+setTimeout(() => pingServices(), 5000);
+setInterval(() => pingServices(), 4 * 60 * 1000);
 
 console.log('🎯 Enhanced Keep-Alive system activated!');
